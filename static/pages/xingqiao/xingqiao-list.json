@@ -1,0 +1,352 @@
+{
+  "type": "page",
+  "title": "列表",
+  "remark": null,
+  "name": "page-demo",
+  "toolbar": [
+    {
+      "type": "button",
+      "actionType": "link",
+      "link": "/xingqiao/new",
+      "label": "新增",
+      "primary": true
+    }
+  ],
+  "body": [
+    {
+      "type": "crud",
+      "name": "sample",
+      "api": {
+        "method": "get",
+        "url": "/xingqiao/list_jobs",
+        "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK', data:{items: payload.data.list,count: payload.data.total}};} else {return {status: 1, msg:payload.stat, data:{items: [],count: 0}};};"
+      },
+      "pageField":"page_index",
+      "perPageField":"page_size",
+      "filter": {
+        "title": "",
+        "mode": "inline",
+        "wrapWithPanel": false,
+        "submitText": "",
+        "controls": [
+          {
+            "type": "text",
+            "name": "job_namespace",
+            "placeholder": "job_namespace 全匹配",
+            "addOn": {
+              "label": "搜索",
+              "type": "submit",
+              "className": "btn-success"
+            },
+            "clearable": true
+          },
+          {
+            "type": "text",
+            "name": "job_id",
+            "placeholder": "job_id 全匹配",
+            "addOn": {
+              "label": "搜索",
+              "type": "submit",
+              "className": "btn-success"
+            },
+            "clearable": true
+          },
+          {
+            "type": "text",
+            "name": "job_reqid",
+            "placeholder": "job_reqid 全匹配",
+            "addOn": {
+              "label": "搜索",
+              "type": "submit",
+              "className": "btn-success"
+            },
+            "clearable": true
+          },
+          {
+            "type": "text",
+            "name": "job_name",
+            "placeholder": "job_name 关键字",
+            "addOn": {
+              "label": "搜索",
+              "type": "submit",
+              "className": "btn-success"
+            },
+            "clearable": true
+          },
+          {
+            "type": "text",
+            "name": "job_type",
+            "placeholder": "job_type 全匹配",
+            "addOn": {
+              "label": "搜索",
+              "type": "submit",
+              "className": "btn-success"
+            },
+            "clearable": true
+          },
+          {
+            "type": "text",
+            "name": "job_status",
+            "placeholder": "status",
+            "addOn": {
+              "label": "搜索",
+              "type": "submit",
+              "className": "btn-success"
+            },
+            "clearable": true
+          }
+        ],
+        "className": "m-b-sm"
+      },
+      "bulkActions": [
+        {
+          "label": "批量修改",
+          "type": "button",
+          "actionType": "dialog",
+          "level": "primary",
+          "dialog": {
+            "title": "批量编辑",
+            "name": "sample-bulk-edit",
+            "body": {
+              "type": "form",
+              "api": "https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/sample/bulkUpdate2",
+              "controls": [
+                {
+                  "type": "text",
+                  "name": "engine",
+                  "label": "Engine"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "label": "批量删除",
+          "type": "button",
+          "level": "danger",
+          "actionType": "ajax",
+          "api": "delete:https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/sample/$ids",
+          "confirmText": "确定要批量删除?"
+        }
+      ],
+      "columns": [
+        {
+          "name": "job_id",
+          "label": "job_id",
+          "width": 20,
+          "sortable": true
+        },
+        {
+          "name": "job_namespace",
+          "label": "job_namespace",
+          "sortable": true
+        },
+        {
+          "name": "job_reqid",
+          "label": "job_reqid",
+          "sortable": true
+        },
+        {
+          "name": "job_name",
+          "label": "job_name",
+          "sortable": true
+        },
+        {
+          "name": "job_status",
+          "type": "map",
+          "label": "状态",
+          "map": {
+            "failed": "<span class=\"label label-danger\">失败</span>",
+            "started": "<span class=\"label label-info\">运行中</span>",
+            "finished": "<span class=\"label label-success\">成功</span>"
+          }
+        },
+        {
+          "name": "job_type",
+          "label": "job_type"
+        },
+        {
+          "name": "operator",
+          "label": "操作用户"
+        },
+        {
+          "name": "c_time",
+          "label": "c_time"
+        },
+        {
+          "type": "operation",
+          "label": "操作",
+          "width": "",
+          "buttons": [
+            {
+              "type": "button-group",
+              "buttons": [
+                {
+                  "label": "查看",
+                  "type": "button",
+                  "level": "primary",
+                  "actionType": "dialog",
+                  "dialog": {
+                    "type": "dialog",
+                    "title": "查看",
+                    "size": "full",
+                    "body": {
+                      "type": "form",
+                      "mode": "horizontal",
+                      "initApi": "/xingqiao/get_job_detail?job_id=${job_id}",
+                      "submitText": "",
+                      "controls": [
+                        {
+                          "type": "static",
+                          "name": "job_id",
+                          "label": "job_id"
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "static",
+                          "name": "job_namespace",
+                          "label": "job_namespace"
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "static",
+                          "name": "job_reqid",
+                          "label": "job_reqid"
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "static",
+                          "name": "job_name",
+                          "label": "job_name"
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "static",
+                          "name": "job_type",
+                          "label": "job_type"
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "static",
+                          "name": "ret_stat",
+                          "label": "ret_stat"
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "json",
+                          "name": "ret_data",
+                          "label": "ret_data"
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "static",
+                          "name": "job_cost",
+                          "label": "job_cost"
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "static",
+                          "name": "job_extra",
+                          "label": "job_extra"
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "static",
+                          "name": "job_timeout",
+                          "label": "job_timeout"
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "static",
+                          "name": "exe_id",
+                          "label": "执行计数 exe_id"
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "static",
+                          "name": "s_time",
+                          "label": "开始时间"
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "static",
+                          "name": "e_time",
+                          "label": "结束时间"
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "static",
+                          "name": "c_time",
+                          "label": "创建时间"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "button",
+                  "label": "状态图",
+                  "level": "success",
+                  "actionType": "url",
+                  "url": "/xingqiao/get_graph?job_id=${job_id}"
+                },
+                {
+                  "type": "button",
+                  "label": "删除",
+                  "level": "danger",
+                  "actionType": "ajax",
+                  "confirmText": "您确认要删除?",
+                  "api": {
+                    "method": "post",
+                    "url": "/xingqiao/delete_job",
+                    "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};",
+                    "data":{
+                        "job_id": "${job_id}"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "placeholder": "-",
+          "fixed": "right"
+        }
+      ],
+      "affixHeader": true,
+      "columnsTogglable": "auto",
+      "placeholder": "暂无数据",
+      "tableClassName": "table-db table-striped",
+      "headerClassName": "crud-table-header",
+      "footerClassName": "crud-table-footer",
+      "toolbarClassName": "crud-table-toolbar",
+      "combineNum": 0,
+      "bodyClassName": "panel-default"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "type": "page",
+  "title": "Dashboard",
+  "initApi": "/demo_api/ping",
+  "body": "ping is ${randstr}"
+}

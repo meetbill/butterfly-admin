@@ -1,0 +1,72 @@
+{
+  "type": "page",
+  "title": "新增",
+  "remark": null,
+  "toolbar": [
+    {
+      "type": "button",
+      "actionType": "link",
+      "link": "/xingqiao/list_jobs",
+      "label": "返回列表"
+    }
+  ],
+  "body": [
+    {
+      "title": "",
+      "type": "form",
+      "redirect": "/xingqiao/list_jobs",
+      "name": "sample-edit-form",
+      "api": {
+        "method": "post",
+        "url": "/xingqiao/create_job",
+        "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};"
+      },
+      "controls": [
+        {
+          "type": "text",
+          "name": "job_namespace",
+          "label": "job_namespace",
+          "required": true,
+          "inline": false,
+          "description": "",
+          "descriptionClassName": "help-block",
+          "placeholder": "",
+          "addOn": null
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "text",
+          "name": "job_type",
+          "label": "job_type",
+          "required": true
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "text",
+          "name": "job_name",
+          "label": "job_name"
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "text",
+          "name": "job_extra",
+          "label": "job_extra"
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "text",
+          "name": "job_timeout",
+          "label": "job_timeout"
+        }
+      ]
+    }
+  ]
+}
