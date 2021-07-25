@@ -137,13 +137,13 @@
           "sortable": true
         },
         {
-          "name": "job_namespace",
-          "label": "job_namespace",
-          "sortable": true
+          "name": "job_client",
+          "label": "job_client",
+          "sortable": false
         },
         {
-          "name": "job_reqid",
-          "label": "job_reqid",
+          "name": "job_namespace",
+          "label": "job_namespace",
           "sortable": true
         },
         {
@@ -200,6 +200,14 @@
                           "type": "static",
                           "name": "job_id",
                           "label": "job_id"
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "static",
+                          "name": "job_client",
+                          "label": "job_client"
                         },
                         {
                           "type": "divider"
@@ -272,6 +280,14 @@
                           "type": "static",
                           "name": "job_timeout",
                           "label": "job_timeout"
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "static",
+                          "name": "job_lock",
+                          "label": "job_lock"
                         },
                         {
                           "type": "divider"
