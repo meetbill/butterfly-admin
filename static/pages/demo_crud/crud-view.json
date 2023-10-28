@@ -1,6 +1,6 @@
 {
   "type": "page",
-  "title": "查看详情${params.id} ${params.id}",
+  "title": "查看详情 ${params.id}",
   "remark": null,
   "toolbar": [
     {
@@ -13,7 +13,7 @@
   "body": [
     {
       "type": "form",
-      "initApi": "https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/sample/${params.id}",
+      "initApi": "${API_HOST}/api/amis-mock/sample/${params.id}",
       "controls": [
         {
           "type": "static",
