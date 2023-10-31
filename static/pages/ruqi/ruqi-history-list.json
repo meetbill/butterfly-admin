@@ -1,0 +1,102 @@
+{
+  "title": "列表",
+  "remark": null,
+  "type": "page",
+  "name": "page-demo",
+  "toolbar": [],
+  "body": [
+    {
+      "type": "crud",
+      "name": "sample",
+      "api": {
+        "method": "get",
+        "url": "/ruqi/get_history",
+        "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK', data:{items: payload.data.list,count: payload.data.total}};} else {return {status: 1, msg:payload.stat, data:{items: [],count: 0}};};"
+      },
+      "pageField": "page_index",
+      "perPageField": "page_size",
+      "filter": {
+        "title": "",
+        "mode": "inline",
+        "wrapWithPanel": false,
+        "submitText": "",
+        "className": "m-b-sm",
+        "body": [
+          {
+            "type": "input-text",
+            "name": "job_id",
+            "placeholder": "job_id 全匹配",
+            "addOn": {
+              "label": "搜索",
+              "type": "submit",
+              "className": "btn-success"
+            },
+            "clearable": true
+          },
+          {
+            "type": "input-text",
+            "name": "job_name",
+            "placeholder": "job_name 全匹配",
+            "addOn": {
+              "label": "搜索",
+              "type": "submit",
+              "className": "btn-success"
+            },
+            "clearable": true
+          }
+        ]
+      },
+      "bulkActions": [],
+      "columns": [
+        {
+          "name": "job_id",
+          "label": "job_id",
+          "sortable": true
+        },
+        {
+          "name": "job_name",
+          "label": "job_name",
+          "sortable": false
+        },
+        {
+          "name": "cmd",
+          "label": "cmd"
+        },
+        {
+          "name": "cmd_is_success",
+          "label": "cmd_is_success",
+          "type": "map",
+          "map": {
+            "false": "<span class=\"label label-danger\">失败</span>",
+            "true": "<span class=\"label label-success\">成功</span>"
+          }
+        },
+        {
+          "name": "cmd_output",
+          "label": "cmd_output"
+        },
+        {
+          "name": "cmd_cost",
+          "label": "cmd_cost"
+        },
+        {
+          "name": "scheduler_name",
+          "label": "scheduler_name"
+        },
+        {
+          "label": "c_time",
+          "name": "c_time"
+        }
+      ],
+      "affixHeader": true,
+      "columnsTogglable": "auto",
+      "placeholder": "暂无数据",
+      "tableClassName": "table-db table-striped",
+      "headerClassName": "crud-table-header",
+      "footerClassName": "crud-table-footer",
+      "toolbarClassName": "crud-table-toolbar",
+      "combineNum": 0,
+      "bodyClassName": "panel-default"
+    }
+  ]
+}

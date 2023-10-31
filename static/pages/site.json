@@ -9,6 +9,26 @@
         "redirect": "/xingqiao/list_jobs"
       },
       {
+        "label": "如期--(定期)",
+        "url": "/ruqi",
+        "rewrite": "/ruqi/scheduler_list",
+        "icon": "fa  fa-gears",
+        "children": [
+          {
+            "label": "列表",
+            "url": "/ruqi/scheduler_list",
+            "icon": "fa fa-list",
+            "schemaApi": "get:/static/pages/ruqi/ruqi-list.json"
+          },
+          {
+            "label": "历史",
+            "url": "/ruqi/scheduler_history_list",
+            "icon": "fa fa-plus",
+            "schemaApi": "get:/static/pages/ruqi/ruqi-history-list.json"
+          }
+        ]
+      },
+      {
         "label": "通用服务",
         "children": [
           {

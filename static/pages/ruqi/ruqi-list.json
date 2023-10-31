@@ -1,0 +1,360 @@
+{
+  "title": "列表",
+  "remark": null,
+  "type": "page",
+  "name": "page-demo",
+  "toolbar": [
+    {
+      "type": "button",
+      "actionType": "dialog",
+      "label": "新增",
+      "icon": "fa fa-plus pull-left",
+      "primary": true,
+      "dialog": {
+        "title": "新增",
+        "body": {
+          "type": "form",
+          "name": "sample-edit-form",
+          "api": {
+            "method": "post",
+            "url": "/ruqi/add_job",
+            "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};"
+          },
+          "body": [
+            {
+              "type": "input-text",
+              "name": "job_id",
+              "label": "job_id",
+              "required": true
+            },
+            {
+              "type": "divider"
+            },
+            {
+              "type": "radios",
+              "name": "job_trigger",
+              "label": "触发方式",
+              "inline": true,
+              "options": [
+                {
+                  "label": "周期",
+                  "value": "interval"
+                },
+                {
+                  "label": "定时",
+                  "value": "cron"
+                },
+                {
+                  "label": "单次",
+                  "value": "date"
+                }
+              ],
+              "required": true
+            },
+            {
+              "type": "divider"
+            },
+            {
+              "type": "input-text",
+              "name": "job_name",
+              "label": "job_name",
+              "required": true
+            },
+            {
+              "type": "divider"
+            },
+            {
+              "type": "input-text",
+              "name": "cmd",
+              "label": "cmd"
+            },
+            {
+              "type": "divider"
+            },
+            {
+              "type": "input-text",
+              "name": "rule",
+              "label": "rule"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "body": [
+    {
+      "type": "crud",
+      "name": "sample",
+      "api": {
+        "method": "get",
+        "url": "/ruqi/get_jobs",
+        "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK', data:{items: payload.data.list,count: payload.data.total}};} else {return {status: 1, msg:payload.stat, data:{items: [],count: 0}};};"
+      },
+      "pageField": "page_index",
+      "perPageField": "page_size",
+      "filter": {
+        "title": "",
+        "mode": "inline",
+        "wrapWithPanel": false,
+        "submitText": "",
+        "className": "m-b-sm",
+        "body": [
+          {
+            "type": "input-text",
+            "name": "job_id",
+            "placeholder": "job_id 全匹配",
+            "addOn": {
+              "label": "搜索",
+              "type": "submit",
+              "className": "btn-success"
+            },
+            "clearable": true
+          },
+          {
+            "type": "input-text",
+            "name": "job_name",
+            "placeholder": "job_name 全匹配",
+            "addOn": {
+              "label": "搜索",
+              "type": "submit",
+              "className": "btn-success"
+            },
+            "clearable": true
+          }
+        ]
+      },
+      "bulkActions": [],
+      "columns": [
+        {
+          "name": "job_id",
+          "label": "job_id",
+          "sortable": true
+        },
+        {
+          "name": "job_name",
+          "label": "job_name",
+          "sortable": false
+        },
+        {
+          "name": "cmd",
+          "label": "cmd"
+        },
+        {
+          "name": "job_trigger",
+          "label": "job_trigger"
+        },
+        {
+          "name": "rule",
+          "label": "rule"
+        },
+        {
+          "name": "next_run_time",
+          "label": "next_run_time"
+        },
+        {
+          "label": "c_time",
+          "name": "c_time"
+        },
+        {
+          "label": "操作",
+          "type": "operation",
+          "width": "",
+          "buttons": [
+            {
+              "type": "button-group",
+              "buttons": [
+                {
+                  "label": "查看",
+                  "type": "button",
+                  "level": "primary",
+                  "actionType": "dialog",
+                  "dialog": {
+                    "type": "dialog",
+                    "size": "lg",
+                    "title": "查看",
+                    "body": {
+                      "type": "form",
+                      "mode": "horizontal",
+                      "initApi": "/ruqi/get_job?job_id=${job_id}",
+                      "submitText": "",
+                      "controls": [
+                        {
+                          "type": "static",
+                          "name": "job_id",
+                          "label": "job_id"
+                        },
+                        {
+                          "type": "static",
+                          "name": "job_name",
+                          "label": "job_name"
+                        },
+                        {
+                          "type": "static",
+                          "name": "cmd",
+                          "label": "cmd"
+                        },
+                        {
+                          "type": "static",
+                          "name": "job_trigger",
+                          "label": "job_trigger"
+                        },
+                        {
+                          "type": "static",
+                          "name": "rule",
+                          "label": "rule"
+                        },
+                        {
+                          "type": "static",
+                          "name": "next_run_time",
+                          "label": "next_run_time"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "button",
+                  "actionType": "dialog",
+                  "label": "编辑",
+                  "dialog": {
+                    "title": "编辑",
+                    "body": {
+                      "type": "form",
+                      "name": "sample-edit-form",
+                      "api": {
+                        "method": "post",
+                        "url": "/ruqi/modify_job",
+                        "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};"
+                      },
+                      "body": [
+                        {
+                          "type": "static",
+                          "name": "job_id",
+                          "label": "job_id",
+                          "required": true
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "radios",
+                          "name": "job_trigger",
+                          "label": "触发方式",
+                          "inline": true,
+                          "options": [
+                            {
+                              "label": "周期",
+                              "value": "interval"
+                            },
+                            {
+                              "label": "定时",
+                              "value": "cron"
+                            },
+                            {
+                              "label": "单次",
+                              "value": "date"
+                            }
+                          ],
+                          "required": true
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "input-text",
+                          "name": "job_name",
+                          "label": "job_name",
+                          "required": true
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "input-text",
+                          "name": "cmd",
+                          "label": "cmd"
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "input-text",
+                          "name": "rule",
+                          "label": "rule"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "button",
+                  "label": "删除",
+                  "level": "danger",
+                  "actionType": "ajax",
+                  "confirmText": "您确认要删除?",
+                  "api": {
+                    "method": "post",
+                    "url": "/ruqi/remove_job",
+                    "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};",
+                    "data": {
+                      "job_id": "${job_id}"
+                    }
+                  }
+                },
+                {
+                  "type": "button",
+                  "label": "暂停",
+                  "level": "warning",
+                  "actionType": "ajax",
+                  "confirmText": "您确认要暂停?",
+                  "hiddenOn": "next_run_time == null",
+                  "api": {
+                    "method": "post",
+                    "url": "/ruqi/pause_job",
+                    "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};",
+                    "data": {
+                      "job_id": "${job_id}"
+                    }
+                  }
+                },
+                {
+                  "type": "button",
+                  "label": "继续",
+                  "level": "info",
+                  "actionType": "ajax",
+                  "confirmText": "您确认要继续?",
+                  "hiddenOn": "next_run_time != null",
+                  "api": {
+                    "method": "post",
+                    "url": "/ruqi/resume_job",
+                    "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};",
+                    "data": {
+                      "job_id": "${job_id}"
+                    }
+                  }
+                },
+                {
+                  "type": "button",
+                  "label": "历史",
+                  "actionType": "link",
+                  "link": "/ruqi/scheduler_history_list?job_id=${job_id}"
+                }
+              ]
+            }
+          ],
+          "placeholder": "-",
+          "fixed": "right"
+        }
+      ],
+      "affixHeader": true,
+      "columnsTogglable": "auto",
+      "placeholder": "暂无数据",
+      "tableClassName": "table-db table-striped",
+      "headerClassName": "crud-table-header",
+      "footerClassName": "crud-table-footer",
+      "toolbarClassName": "crud-table-toolbar",
+      "combineNum": 0,
+      "bodyClassName": "panel-default"
+    }
+  ]
+}
