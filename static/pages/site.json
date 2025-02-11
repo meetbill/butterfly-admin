@@ -58,6 +58,7 @@
         "children": [
           {
             "label": "测试 ping",
+            "url": "/demo_ping/ping",
             "schemaApi": "get:/static/pages/demo_ping/ping.json"
           },
           {
