@@ -17,7 +17,7 @@
           "name": "sample-edit-form",
           "api": {
             "method": "post",
-            "url": "/ruqi/add_job",
+            "url": "/ruqi/job_add",
             "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};"
           },
           "body": [
@@ -87,7 +87,7 @@
       "name": "sample",
       "api": {
         "method": "get",
-        "url": "/ruqi/get_jobs",
+        "url": "/ruqi/job_list",
         "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK', data:{items: payload.data.list,count: payload.data.total}};} else {return {status: 1, msg:payload.stat, data:{items: [],count: 0}};};"
       },
       "pageField": "page_index",
@@ -175,7 +175,7 @@
                     "body": {
                       "type": "form",
                       "mode": "horizontal",
-                      "initApi": "/ruqi/get_job?job_id=${job_id}",
+                      "initApi": "/ruqi/job_show?job_id=${job_id}",
                       "submitText": "",
                       "controls": [
                         {
@@ -223,7 +223,7 @@
                       "name": "sample-edit-form",
                       "api": {
                         "method": "post",
-                        "url": "/ruqi/modify_job",
+                        "url": "/ruqi/job_modify",
                         "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};"
                       },
                       "body": [
@@ -294,7 +294,7 @@
                   "confirmText": "您确认要删除?",
                   "api": {
                     "method": "post",
-                    "url": "/ruqi/remove_job",
+                    "url": "/ruqi/job_remove",
                     "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};",
                     "data": {
                       "job_id": "${job_id}"
@@ -310,7 +310,7 @@
                   "hiddenOn": "next_run_time == null",
                   "api": {
                     "method": "post",
-                    "url": "/ruqi/pause_job",
+                    "url": "/ruqi/job_pause",
                     "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};",
                     "data": {
                       "job_id": "${job_id}"
@@ -326,7 +326,7 @@
                   "hiddenOn": "next_run_time != null",
                   "api": {
                     "method": "post",
-                    "url": "/ruqi/resume_job",
+                    "url": "/ruqi/job_resume",
                     "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};",
                     "data": {
                       "job_id": "${job_id}"

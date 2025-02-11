@@ -10,7 +10,7 @@
       "name": "sample",
       "api": {
         "method": "get",
-        "url": "/ruqi/get_history",
+        "url": "/ruqi/job_history_list",
         "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK', data:{items: payload.data.list,count: payload.data.total}};} else {return {status: 1, msg:payload.stat, data:{items: [],count: 0}};};"
       },
       "pageField": "page_index",
