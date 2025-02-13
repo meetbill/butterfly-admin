@@ -16,6 +16,7 @@ butterfly-admin
 │   └── pages
 └── templates                               // butterfly-admin templates
     ├── favicon.ico
+    ├── index_sso.html                      // 用于单点登录场景
     └── index.html
 ```
 
