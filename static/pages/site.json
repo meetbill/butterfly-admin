@@ -6,7 +6,7 @@
       {
         "label": "Home",
         "url": "/",
-        "redirect": "/xingqiao/list_jobs"
+        "redirect": "/demo_ping/ping"
       },
       {
         "label": "通用服务",

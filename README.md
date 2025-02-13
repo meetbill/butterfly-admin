@@ -18,3 +18,7 @@ butterfly-admin
     ├── favicon.ico
     └── index.html
 ```
+
+## 1 编译 nginx
+> * (1) [编译 nginx](https://github.com/meetbill/op_practice_book/blob/master/doc/web/nginx.md)
+> * (2) 将编译后的 nginx 放到 butterfly-admin/sbin 目录
