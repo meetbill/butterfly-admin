@@ -151,6 +151,14 @@
                   }
                 }
               ]
+            },
+            {
+              "type": "button",
+              "label": "消息详情",
+              "level": "success",
+              "hiddenOn": "task_reqid == ''",
+              "actionType": "link",
+              "link": "/canghai/msg_show?msg_id=${task_reqid}"
             }
           ],
           "placeholder": "-",

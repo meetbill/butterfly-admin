@@ -58,7 +58,7 @@
                                     "label": "详情",
                                     "level": "success",
                                     "actionType": "link",
-                                    "url": "/canghai/msg_show?msg_id=${id}"
+                                    "link": "/canghai/msg_show?msg_id=${id}"
                                 },
                                 {
                                     "type": "button",
