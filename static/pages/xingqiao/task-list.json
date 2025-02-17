@@ -1,0 +1,171 @@
+{
+  "type": "page",
+  "title": "列表",
+  "remark": null,
+  "name": "page-demo",
+  "toolbar": [],
+  "body": [
+    {
+      "type": "crud",
+      "name": "sample",
+      "api": {
+        "method": "get",
+        "url": "/xingqiao/list_tasks?job_id=$job_id",
+        "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK', data:{items: payload.data.list,count: payload.data.total}};} else {return {status: 1, msg:payload.stat, data:{items: [],count: 0}};};"
+      },
+      "pageField": "page_index",
+      "perPageField": "page_size",
+      "filter": {
+        "title": "",
+        "mode": "inline",
+        "wrapWithPanel": false,
+        "submitText": "",
+        "className": "m-b-sm",
+        "body": []
+      },
+      "bulkActions": [],
+      "columns": [
+        {
+          "name": "task_id",
+          "label": "task_id",
+          "width": 20,
+          "sortable": true
+        },
+        {
+          "name": "task_label",
+          "label": "task_label"
+        },
+        {
+          "name": "task_reqid",
+          "label": "task_reqid"
+        },
+        {
+          "name": "task_cmd",
+          "label": "task_cmd"
+        },
+        {
+          "name": "task_status",
+          "label": "状态",
+          "type": "map",
+          "map": {
+            "waiting": "<span class=\"label label-default\">等待</span>",
+            "pending": "<span class=\"label label-primary\">准备</span>",
+            "started": "<span class=\"label label-info\">运行中</span>",
+            "finished": "<span class=\"label label-success\">成功</span>",
+            "failed": "<span class=\"label label-danger\">失败</span>"
+          }
+        },
+        {
+          "name": "ret_stat",
+          "label": "ret_stat"
+        },
+        {
+          "name": "task_cost",
+          "label": "task_cost"
+        },
+        {
+          "name": "u_time",
+          "label": "u_time"
+        },
+        {
+          "name": "c_time",
+          "label": "c_time"
+        },
+        {
+          "label": "操作",
+          "type": "operation",
+          "width": "",
+          "buttons": [
+            {
+              "type": "button-group",
+              "buttons": [
+                {
+                  "label": "查看",
+                  "type": "button",
+                  "level": "primary",
+                  "actionType": "dialog",
+                  "dialog": {
+                    "type": "dialog",
+                    "title": "查看",
+                    "size": "full",
+                    "body": {
+                      "type": "form",
+                      "mode": "horizontal",
+                      "initApi": "/xingqiao/get_task?task_id=${task_id}",
+                      "submitText": "",
+                      "controls": [
+                        {
+                          "type": "static",
+                          "name": "task_dependencies",
+                          "label": "task_dependencies"
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "static",
+                          "name": "task_requires",
+                          "label": "task_requires"
+                        },
+                        {
+                          "type": "static",
+                          "name": "task_provides",
+                          "label": "task_provides"
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "static",
+                          "name": "task_params",
+                          "label": "task_params"
+                        },
+                        {
+                          "type": "static",
+                          "name": "task_extra",
+                          "label": "task_extra"
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "json",
+                          "name": "ret_data",
+                          "label": "ret_data"
+                        },
+                        {
+                          "type": "divider"
+                        },
+                        {
+                          "type": "static",
+                          "name": "u_time",
+                          "label": "u_time"
+                        },
+                        {
+                          "type": "static",
+                          "name": "c_time",
+                          "label": "c_time"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "placeholder": "-",
+          "fixed": "right"
+        }
+      ],
+      "affixHeader": true,
+      "columnsTogglable": "auto",
+      "placeholder": "暂无数据",
+      "tableClassName": "table-db table-striped",
+      "headerClassName": "crud-table-header",
+      "footerClassName": "crud-table-footer",
+      "toolbarClassName": "crud-table-toolbar",
+      "combineNum": 0,
+      "bodyClassName": "panel-default"
+    }
+  ]
+}

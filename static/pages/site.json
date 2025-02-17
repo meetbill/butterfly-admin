@@ -48,6 +48,12 @@
                 "url": "/xingqiao/new",
                 "icon": "fa fa-plus",
                 "schemaApi": "get:/static/pages/xingqiao/xingqiao-new.json"
+              },
+              {
+                "label": "TaskList",
+                "url": "/xingqiao/task_list",
+                "schemaApi": "get:/static/pages/xingqiao/task-list.json",
+                "visible": false
               }
             ]
           },
