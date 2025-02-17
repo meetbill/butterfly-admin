@@ -1,0 +1,76 @@
+{
+  "type": "page",
+  "title": "列表",
+  "remark": null,
+  "name": "page-demo",
+  "toolbar": [],
+  "body": [
+    {
+      "type": "crud",
+      "name": "sample",
+      "api": {
+        "method": "get",
+        "url": "/wuxing/section_list",
+        "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK', data:{items: payload.data.list,count: payload.data.total}};} else {return {status: 1, msg:payload.stat, data:{items: [],count: 0}};};"
+      },
+      "pageField":"page_index",
+      "perPageField":"page_size",
+      "filter": {
+        "title": "",
+        "mode": "inline",
+        "wrapWithPanel": false,
+        "submitText": "",
+        "controls": [
+          {
+            "type": "text",
+            "name": "namespace",
+            "placeholder": "namespace 全匹配",
+            "addOn": {
+              "label": "搜索",
+              "type": "submit",
+              "className": "btn-success"
+            },
+            "clearable": true
+          }
+        ],
+        "className": "m-b-sm"
+      },
+      "bulkActions": [],
+      "columns": [
+        {
+          "name": "namespace",
+          "label": "namespace"
+        },
+        {
+          "name": "section_name",
+          "label": "section 名称"
+        },
+        {
+          "name": "section_version",
+          "label": "section 版本"
+        },
+        {
+          "name": "section_md5",
+          "label": "section md5"
+        },
+        {
+          "name": "is_enabled",
+          "label": "是否已启用"
+        },
+        {
+          "name": "u_time",
+          "label": "更新时间"
+        }
+      ],
+      "affixHeader": true,
+      "columnsTogglable": "auto",
+      "placeholder": "暂无数据",
+      "tableClassName": "table-db table-striped",
+      "headerClassName": "crud-table-header",
+      "footerClassName": "crud-table-footer",
+      "toolbarClassName": "crud-table-toolbar",
+      "combineNum": 0,
+      "bodyClassName": "panel-default"
+    }
+  ]
+}

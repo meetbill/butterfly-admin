@@ -88,6 +88,20 @@
                 "visible": false
               }
             ]
+          },
+          {
+            "label": "五行--(数据)",
+            "url": "/wuxing",
+            "rewrite": "/wuxing/section_list",
+            "icon": "fa  fa-gears",
+            "children": [
+              {
+                "label": "Section",
+                "url": "/wuxing/section_list",
+                "icon": "fa fa-list",
+                "schemaApi": "get:/static/pages/wuxing/section-list.json"
+              }
+            ]
           }
         ]
       },
