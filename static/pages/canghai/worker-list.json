@@ -1,0 +1,159 @@
+{
+    "type": "page",
+    "body": {
+        "type": "service",
+        "api": "/canghai/worker_list",
+        "body": [
+            {
+                "type": "table",
+                "title": "Worker",
+                "source": "$workers",
+                "columns": [
+                    {
+                        "name": "name",
+                        "label": "Name"
+                    },
+                    {
+                        "name": "nickname",
+                        "label": "Nickname"
+                    },
+                    {
+                        "name": "version",
+                        "label": "Version"
+                    },
+                    {
+                        "name": "queues_count",
+                        "label": "Queues_count"
+                    },
+                    {
+                        "name": "type",
+                        "name": "state",
+                        "label": "State",
+                        "type": "mapping",
+                        "map": {
+                            "idle": "<span class='label label-success'>idle</span>",
+                            "busy": "<span class='label label-warning'>busy</span>",
+                            "*": "${state}"
+                        }
+                    },
+                    {
+                        "type": "operation",
+                        "label": "操作",
+                        "width": "",
+                        "buttons": [
+                            {
+                                "type": "button-group",
+                                "buttons": [
+                                    {
+                                        "label": "查看",
+                                        "type": "button",
+                                        "level": "primary",
+                                        "actionType": "dialog",
+                                        "dialog": {
+                                            "type": "dialog",
+                                            "title": "查看",
+                                            "size": "full",
+                                            "body": {
+                                                "type": "form",
+                                                "mode": "horizontal",
+                                                "initApi": "/canghai/worker_show?name=${name}",
+                                                "submitText": "",
+                                                "controls": [
+                                                    {
+                                                        "type": "static",
+                                                        "name": "name",
+                                                        "label": "name"
+                                                    },
+                                                    {
+                                                        "type": "divider"
+                                                    },
+                                                    {
+                                                        "type": "static",
+                                                        "name": "nickname",
+                                                        "label": "nickname"
+                                                    },
+                                                    {
+                                                        "type": "divider"
+                                                    },
+                                                    {
+                                                        "type": "static",
+                                                        "name": "state",
+                                                        "label": "state"
+                                                    },
+                                                    {
+                                                        "type": "divider"
+                                                    },
+                                                    {
+                                                        "type": "static",
+                                                        "name": "version",
+                                                        "label": "version"
+                                                    },
+                                                    {
+                                                        "type": "divider"
+                                                    },
+                                                    {
+                                                        "type": "static",
+                                                        "name": "python_version",
+                                                        "label": "Python 版本"
+                                                    },
+                                                    {
+                                                        "type": "divider"
+                                                    },
+                                                    {
+                                                        "type": "static",
+                                                        "name": "home_dir",
+                                                        "label": "部署路径"
+                                                    },
+                                                    {
+                                                        "type": "divider"
+                                                    },
+                                                    {
+                                                        "type": "static",
+                                                        "name": "birth_date",
+                                                        "label": "birth_date"
+                                                    },
+                                                    {
+                                                        "type": "divider"
+                                                    },
+                                                    {
+                                                        "type": "static",
+                                                        "name": "last_heartbeat",
+                                                        "label": "last_heartbeat"
+                                                    },
+                                                    {
+                                                        "type": "divider"
+                                                    },
+                                                    {
+                                                        "type": "static",
+                                                        "name": "failed_msg_count",
+                                                        "label": "failed_msg_count"
+                                                    },
+                                                    {
+                                                        "type": "divider"
+                                                    },
+                                                    {
+                                                        "type": "static",
+                                                        "name": "successful_msg_count",
+                                                        "label": "successful_msg_count"
+                                                    },
+                                                    {
+                                                        "type": "divider"
+                                                    },
+                                                    {
+                                                        "type": "json",
+                                                        "name": "queues",
+                                                        "label": "queues"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

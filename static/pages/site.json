@@ -50,6 +50,38 @@
                 "schemaApi": "get:/static/pages/xingqiao/xingqiao-new.json"
               }
             ]
+          },
+          {
+            "label": "沧海--(队列)",
+            "url": "/canghai",
+            "rewrite": "/canghai/queue_list",
+            "icon": "fa  fa-gears",
+            "children": [
+              {
+                "label": "Queue",
+                "url": "/canghai/queue_list",
+                "icon": "fa fa-list",
+                "schemaApi": "get:/static/pages/canghai/queue-list.json"
+              },
+              {
+                "label": "Worker",
+                "url": "/canghai/worker_list",
+                "icon": "fa fa-list",
+                "schemaApi": "get:/static/pages/canghai/worker-list.json"
+              },
+              {
+                "label": "Msglist",
+                "url": "/canghai/msg_list",
+                "schemaApi": "get:/static/pages/canghai/msg-list.json",
+                "visible": false
+              },
+              {
+                "label": "MsgShow",
+                "url": "/canghai/msg_show",
+                "schemaApi": "get:/static/pages/canghai/msg-show.json",
+                "visible": false
+              }
+            ]
           }
         ]
       },

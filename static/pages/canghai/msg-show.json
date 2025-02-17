@@ -1,0 +1,92 @@
+{
+    "type": "page",
+    "title": "消息队列",
+    "remark": "",
+    "body": [
+        {
+            "type": "form",
+            "initApi": "/canghai/msg_show?msg_id=${msg_id}",
+            "title": "消息队列详情",
+            "mode": "horizontal",
+            "actions": [],
+            "body": [
+                {
+                    "type": "static",
+                    "label": "msg id",
+                    "name": "id"
+                },
+                {
+                    "type": "static",
+                    "label": "描述",
+                    "name": "description"
+                },
+                {
+                    "type": "static",
+                    "label": "消息内容",
+                    "name": "msg_data"
+                },
+                {
+                    "type": "control",
+                    "label": "状态",
+                    "body": [
+                        {
+                            "type": "mapping",
+                            "name": "status",
+                            "map": {
+                                "queued": "<span class='label label-info'>队列中</span>",
+                                "started": "<span class='label label-info'>进行中</span>",
+                                "finished": "<span class='label label-success'>执行成功</span>",
+                                "failed": "<span class='label label-danger'>执行失败</span>"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "static",
+                    "label": "队列名称",
+                    "name": "origin"
+                },
+                {
+                    "type": "static",
+                    "label": "创建时间",
+                    "name": "created_at"
+                },
+                {
+                    "type": "static",
+                    "label": "进入队列时间",
+                    "name": "enqueued_at"
+                },
+                {
+                    "type": "static",
+                    "label": "执行开始时间",
+                    "name": "started_at"
+                },
+                {
+                    "type": "static",
+                    "label": "执行结束时间",
+                    "name": "ended_at"
+                },
+                {
+                    "type": "static",
+                    "label": "处理消息 worker",
+                    "name": "handle_worker"
+                },
+                {
+                    "type": "static-json",
+                    "label": "执行结果",
+                    "name": "result"
+                },
+                {
+                    "type": "static",
+                    "label": "执行信息",
+                    "name": "exc_info"
+                },
+                {
+                    "type": "static",
+                    "label": "执行耗时",
+                    "name": "cost"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,96 @@
+{
+    "type": "page",
+    "title": "列表",
+    "remark": null,
+    "name": "page-demo",
+    "toolbar": [
+        {
+            "type": "button",
+            "label": "清空队列",
+            "level": "danger",
+            "actionType": "ajax",
+            "confirmText": "您确认要清空队列?",
+            "api": {
+                "method": "post",
+                "url": "/canghai/queue_empty",
+                "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};",
+                "data": {
+                    "queue_name": "${queue_name}",
+                    "registry_name": "${registry_name}"
+                }
+            }
+        }
+    ],
+    "body": [
+        {
+            "type": "crud",
+            "name": "sample",
+            "api": {
+                "method": "get",
+                "url": "/canghai/msg_list?queue_name=${queue_name}&registry_name=${registry_name}",
+                "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK', data:{items: payload.data.list,count: payload.data.total}};} else {return {status: 1, msg:payload.stat, data:{items: [],count: 0}};};"
+            },
+            "pageField": "page_index",
+            "perPageField": "page_size",
+            "columns": [
+                {
+                    "name": "id",
+                    "label": "id"
+                },
+                {
+                    "name": "msg_data",
+                    "label": "消息内容"
+                },
+                {
+                    "name": "created_at",
+                    "label": "创建时间"
+                },
+                {
+                    "type": "operation",
+                    "label": "操作",
+                    "width": "",
+                    "buttons": [
+                        {
+                            "type": "button-group",
+                            "buttons": [
+                                {
+                                    "type": "button",
+                                    "label": "详情",
+                                    "level": "success",
+                                    "actionType": "link",
+                                    "url": "/canghai/msg_show?msg_id=${id}"
+                                },
+                                {
+                                    "type": "button",
+                                    "label": "删除",
+                                    "level": "danger",
+                                    "actionType": "ajax",
+                                    "confirmText": "您确认要删除?",
+                                    "api": {
+                                        "method": "post",
+                                        "url": "/canghai/msg_delete",
+                                        "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};",
+                                        "data": {
+                                            "msg_id": "${id}"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "placeholder": "-",
+                    "fixed": "right"
+                }
+            ],
+            "affixHeader": true,
+            "columnsTogglable": "auto",
+            "placeholder": "暂无数据",
+            "tableClassName": "table-db table-striped",
+            "headerClassName": "crud-table-header",
+            "footerClassName": "crud-table-footer",
+            "toolbarClassName": "crud-table-toolbar",
+            "combineNum": 0,
+            "bodyClassName": "panel-default"
+        }
+    ]
+}

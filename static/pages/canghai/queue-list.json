@@ -1,0 +1,40 @@
+{
+    "type": "page",
+    "body": {
+        "type": "service",
+        "api": "/canghai/queue_list",
+        "body": [
+            {
+                "type": "table",
+                "title": "队列",
+                "source": "$queues",
+                "columns": [
+                    {
+                        "name": "name",
+                        "label": "Name"
+                    },
+                    {
+                        "label": "Queued",
+                        "type": "tpl",
+                        "tpl": "<a href='#/canghai/msg_list?queue_name=${name}&registry_name=queued'>${count}</a>"
+                    },
+                    {
+                        "label": "Started",
+                        "type": "tpl",
+                        "tpl": "<a href='#/canghai/msg_list?queue_name=${name}&registry_name=started'>${started_msg_registry_count}</a>"
+                    },
+                    {
+                        "label": "Finished",
+                        "type": "tpl",
+                        "tpl": "<a href='#/canghai/msg_list?queue_name=${name}&registry_name=finished'>${finished_msg_registry_count}</a>"
+                    },
+                    {
+                        "label": "Failed",
+                        "type": "tpl",
+                        "tpl": "<a href='#/canghai/msg_list?queue_name=${name}&registry_name=failed'>${failed_msg_registry_count}</a>"
+                    }
+                ]
+            }
+        ]
+    }
+}
