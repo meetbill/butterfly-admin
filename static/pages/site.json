@@ -102,6 +102,34 @@
                 "schemaApi": "get:/static/pages/wuxing/section-list.json"
               }
             ]
+          },
+          {
+            "label": "百策--(决策)",
+            "url": "/baice",
+            "rewrite": "/baice/source_list",
+            "icon": "fa  fa-gears",
+            "children": [
+              {
+                "label": "Source",
+                "url": "/baice/source_list",
+                "icon": "fa fa-list",
+                "schemaApi": "get:/static/pages/baice/source-list.json"
+              },
+              {
+                "label": "Event",
+                "url": "/baice/event_list",
+                "icon": "fa fa-list",
+                "schemaApi": "get:/static/pages/baice/event-list.json",
+                "visible": false
+              },
+              {
+                "label": "Audit",
+                "url": "/baice/audit_list",
+                "icon": "fa fa-list",
+                "schemaApi": "get:/static/pages/baice/audit-list.json",
+                "visible": false
+              }
+            ]
           }
         ]
       },

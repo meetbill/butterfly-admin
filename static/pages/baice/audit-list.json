@@ -1,0 +1,78 @@
+{
+  "type": "page",
+  "title": "列表",
+  "remark": null,
+  "name": "page-demo",
+  "toolbar": [],
+  "body": [
+    {
+      "type": "crud",
+      "name": "sample",
+      "api": {
+        "method": "get",
+        "url": "/baice/audit_list?target=${target}",
+        "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK', data:{items: payload.data.list,count: payload.data.total}};} else {return {status: 1, msg:payload.stat, data:{items: [],count: 0}};};"
+      },
+      "pageField": "page_index",
+      "perPageField": "page_size",
+      "filter": {
+        "title": "",
+        "mode": "inline",
+        "wrapWithPanel": false,
+        "submitText": "",
+        "className": "m-b-sm",
+        "body": []
+      },
+      "bulkActions": [],
+      "columns": [
+        {
+          "name": "id",
+          "label": "id"
+        },
+        {
+          "name": "event_id",
+          "label": "event_id"
+        },
+        {
+          "name": "event_source",
+          "label": "event_source"
+        },
+        {
+          "name": "event_target",
+          "label": "event_target"
+        },
+        {
+          "name": "event_status",
+          "label": "event_status"
+        },
+        {
+          "type": "json",
+          "name": "event_data",
+          "label": "event_data"
+        },
+        {
+          "name": "event_count",
+          "label": "event_count"
+        },
+        {
+          "type": "json",
+          "name": "action_data",
+          "label": "action_data"
+        },
+        {
+          "name": "create_time",
+          "label": "create_time"
+        }
+      ],
+      "affixHeader": true,
+      "columnsTogglable": "auto",
+      "placeholder": "暂无数据",
+      "tableClassName": "table-db table-striped",
+      "headerClassName": "crud-table-header",
+      "footerClassName": "crud-table-footer",
+      "toolbarClassName": "crud-table-toolbar",
+      "combineNum": 0,
+      "bodyClassName": "panel-default"
+    }
+  ]
+}

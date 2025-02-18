@@ -1,0 +1,133 @@
+{
+  "type": "page",
+  "title": "事件列表",
+  "remark": "汇聚事件",
+  "body": [
+    {
+      "type": "crud",
+      "api": {
+        "method": "get",
+        "url": "/baice/source_list",
+        "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK', data:{items: payload.data.list,count: payload.data.total}};} else {return {status: 1, msg:payload.stat, data:{items: [],count: 0}};};"
+      },
+      "pageField": "page_index",
+      "perPageField": "page_size",
+      "filter": {
+        "title": "条件搜索",
+        "mode": "inline",
+        "submitText": "",
+        "body": [
+          {
+            "type": "input-text",
+            "name": "source_namespace",
+            "placeholder": "source_namespace 查询",
+            "addOn": {
+              "label": "搜索",
+              "type": "submit"
+            },
+            "clearable": true
+          }
+        ]
+       },
+      "mode": "cards",
+      "bulkActions": [],
+      "draggable": true,
+      "card": {
+        "header": {
+          "title": "${source_namespace}(${source_name})",
+          "subTitle": "$source_desc",
+          "subTitlePlaceholder": "暂无说明",
+          "avatar": "<%= data.avatar || \"https://internal-amis-res.cdn.bcebos.com/images/2019-12/1575350573496/4873dbfaf6a5.png\" %>",
+          "avatarClassName": "pull-left thumb b-5x m-r"
+        },
+        "actions": [
+          {
+            "type": "button",
+            "label": "查看",
+            "actionType": "dialog",
+            "dialog": {
+              "title": "查看",
+              "body": {
+                "type": "form",
+                "body": [
+                  {
+                    "type": "static",
+                    "name": "source_name",
+                    "label": "source_name"
+                  },
+                  {
+                    "type": "divider"
+                  },
+                  {
+                    "type": "static",
+                    "name": "err_count",
+                    "label": "err_count"
+                  },
+                  {
+                    "type": "divider"
+                  },
+                  {
+                    "type": "static",
+                    "name": "warn_count",
+                    "label": "warn_count"
+                  },
+                  {
+                    "type": "divider"
+                  },
+                  {
+                    "type": "static",
+                    "name": "ok_count",
+                    "label": "ok_count"
+                  },
+                  {
+                    "type": "divider"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "button",
+            "label": "异常",
+            "actionType": "link",
+            "link": "/baice/event_list?source=${source_name}&flag=ERR"
+          },
+          {
+            "type": "button",
+            "label": "警告",
+            "actionType": "link",
+            "link": "/baice/event_list?source=${source_name}&flag=WARN"
+          }
+        ],
+        "body": [
+          {
+            "name": "source_name",
+            "label": "Name"
+          },
+          {
+            "name": "err_count",
+            "label": "Err",
+            "type": "mapping",
+            "map": {
+              "0": "<span>异常</span> $err_count",
+              "*": "<span class='label label-danger'>异常</span> $err_count"
+            }
+          },
+          {
+            "name": "warn_count",
+            "label": "Warn",
+            "type": "mapping",
+            "map": {
+              "0": "<span>警告</span> $warn_count",
+              "*": "<span class='label label-warning'>警告</span> $warn_count"
+            }
+          },
+          {
+            "name": "ok_count",
+            "label": "Ok"
+          }
+        ]
+      }
+    }
+  ]
+}
