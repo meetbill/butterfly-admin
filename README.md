@@ -1,7 +1,7 @@
 # butterfly-admin
 基于 amis 并适配 butterfly 的后台模板
 
-# 部署
+# 1 部署
 ```
 butterfly-admin
 ├── conf                                    // nginx 配置文件
@@ -20,6 +20,10 @@ butterfly-admin
     └── index.html
 ```
 
-## 1 编译 nginx
+## 1.1 编译 nginx
 > * (1) [编译 nginx](https://github.com/meetbill/op_practice_book/blob/master/doc/web/nginx.md)
 > * (2) 将编译后的 nginx 放到 butterfly-admin/sbin 目录
+
+# 2 帮助
+> * [AMIS 示例](https://aisuda.bce.baidu.com/amis/examples/index)
+> * [AMIS 可视化编辑器](https://aisuda.github.io/amis-editor-demo/#/hello-world) 页面数据保存在本地浏览器中
