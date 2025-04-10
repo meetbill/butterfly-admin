@@ -160,7 +160,7 @@
 								"width": 130,
 								"buttons": [{
 										"type": "button",
-										"icon": "fa fa-pencil",
+										"icon": "fa fa-cog",
 										"actionType": "dialog",
 										"dialog": {
 											"title": "编辑",
@@ -211,6 +211,43 @@
 														"name": "parent_id",
 														"label": "父级页面",
 														"source": "/pangu/menu_list_for_page_select"
+													}
+												]
+											}
+										}
+									},
+									{
+										"type": "button",
+										"icon": "fa fa-pencil",
+										"actionType": "dialog",
+										"visibleOn": "is_folder == false",
+										"dialog": {
+											"title": "编辑",
+											"size": "lg",
+											"body": {
+												"type": "form",
+												"name": "sample-edit-form",
+												"initApi": "/pangu/page_get?page_id=${page_id}",
+												"api": {
+													"method": "post",
+													"url": "/pangu/page_update",
+													"adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};",
+													"data": {
+														"page_id": "${page_id}",
+														"page_content": "${page_content}",
+														"page_describe": "${page_describe}"
+													}
+												},
+												"body": [{
+														"type": "input-text",
+														"name": "page_describe",
+														"label": "描述"
+													},
+													{
+														"name": "page_content",
+														"type": "editor",
+														"language": "json",
+														"label": "page_content"
 													}
 												]
 											}
