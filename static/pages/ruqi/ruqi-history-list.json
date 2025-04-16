@@ -43,6 +43,22 @@
               "className": "btn-success"
             },
             "clearable": true
+          },
+          {
+            "type": "select",
+            "name": "is_success",
+            "label": "执行结果",
+            "options": [
+                {
+                    "label": "成功",
+                    "value": "yes"
+                },
+                {
+                    "label": "失败",
+                    "value": "no"
+                }
+            ],
+            "clearable": true
           }
         ]
       },
