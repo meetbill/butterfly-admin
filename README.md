@@ -23,8 +23,22 @@ butterfly-admin
 ```
 
 ## 1.1 编译 nginx
-> * (1) [编译 nginx](https://github.com/meetbill/op_practice_book/blob/master/doc/web/nginx.md)
-> * (2) 将编译后的 nginx 放到 butterfly-admin/sbin 目录
+[编译 nginx](https://github.com/meetbill/op_practice_book/blob/master/doc/web/nginx.md)
+```
+$ # 通过 CC 环境变量指定 GCC(可选)，如果在低版本的 Centos 上，可以指定下
+$ CC=/opt/compiler/gcc-8.2/bin/gcc
+
+$ # 下载 pcre(让 Nginx 支持 Rewrite 功能)
+$ wget https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.46/pcre2-10.46.tar.gz
+$ tar -zxf pcre2-10.46.tar.gz
+
+$ wget http://nginx.org/download/nginx-1.29.1.tar.gz
+$ tar -zxf nginx-1.29.1.tar.gz
+$ ./configure --prefix=../nginx_output --with-pcre=../pcre2-10.46 --with-http_auth_request_module --with-http_stub_status_module
+$ make
+$ make install
+```
+将编译后的 ../nginx_output/sbin/nginx 放到 butterfly-admin/sbin 目录
 
 # 2 帮助
 > * [AMIS 示例](https://aisuda.bce.baidu.com/amis/examples/index)
