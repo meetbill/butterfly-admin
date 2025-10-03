@@ -47,7 +47,44 @@ $ mkdir jssdk && cd jssdk
 $ wget https://github.com/baidu/amis/releases/download/6.13.0/jssdk.tar.gz
 $ tar -zxf jssdk.tar.gz
 ```
-如下载 amis jssdk，需要将 templates 中依赖的 6.13.0 相关部分替换为 `static/jssdk/xxx`
+如下载 amis jssdk，需要将 templates 中依赖的 6.13.0 相关部分替换为 `static/jssdk/xxx`，index.html 中 head 内容如下
+```
+  <head>
+    <meta charset="UTF-8" />
+    <title>amis admin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link
+      rel="stylesheet"
+      title="default"
+      href="static/jssdk/sdk.css"
+    />
+    <link rel="stylesheet" href="static/jssdk/helper.css" />
+    <link
+      rel="stylesheet"
+      href="static/jssdk/iconfont.css"
+    />
+    <script src="static/jssdk/sdk.js"></script>
+    <script src="https://unpkg.com/vue@2"></script>
+    <script src="https://unpkg.com/history@4.10.1/umd/history.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <style>
+      html,
+      body,
+      .app-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+```
 
 # 2 帮助
 > * [AMIS 示例](https://aisuda.bce.baidu.com/amis/examples/index)
