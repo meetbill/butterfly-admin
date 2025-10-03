@@ -25,7 +25,7 @@ butterfly-admin
 ## 1.1 编译 nginx
 [编译 nginx](https://github.com/meetbill/op_practice_book/blob/master/doc/web/nginx.md)
 ```
-$ # 通过 CC 环境变量指定 GCC(可选)，如果在低版本的 Centos 上，可以指定下
+$ # 通过 CC 环境变量指定 GCC(可选)，如果在低版本的 Centos 上编译，可以指定下 GCC
 $ CC=/opt/compiler/gcc-8.2/bin/gcc
 
 $ # 下载 pcre(让 Nginx 支持 Rewrite 功能)
@@ -39,6 +39,15 @@ $ make
 $ make install
 ```
 将编译后的 ../nginx_output/sbin/nginx 放到 butterfly-admin/sbin 目录
+
+## 1.2 下载 amis jssdk(可选)
+```
+$ cd butterfly-admin/static
+$ mkdir jssdk && cd jssdk
+$ wget https://github.com/baidu/amis/releases/download/6.13.0/jssdk.tar.gz
+$ tar -zxf jssdk.tar.gz
+```
+如下载 amis jssdk，需要将 templates 中依赖的 6.13.0 相关部分替换为 `static/jssdk/xxx`
 
 # 2 帮助
 > * [AMIS 示例](https://aisuda.bce.baidu.com/amis/examples/index)
