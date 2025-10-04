@@ -92,9 +92,12 @@ $ tar -zxf jssdk.tar.gz
 > * [AMIS 示例](https://aisuda.bce.baidu.com/amis/examples/index)
 > * [AMIS 可视化编辑器](https://aisuda.github.io/amis-editor-demo/#/hello-world) 页面数据保存在本地浏览器中
 
-# 3 进阶
-## 3.1 单点登录
+# 3 文档
+https://meetbill.gitbook.io/butterfly-user-doc/fe/butterfly-admin
+
+# 4 进阶
+## 4.1 单点登录
 https://meetbill.gitbook.io/butterfly-user-doc/fe/butterfly-admin/sso
 
-## 3.2 页面管理
+## 4.2 页面管理
 https://meetbill.gitbook.io/butterfly-user-doc/fe/butterfly-admin/pangu
