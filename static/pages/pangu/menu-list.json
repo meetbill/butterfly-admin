@@ -1,279 +1,314 @@
 {
-	"type": "page",
-	"body": [{
-		"type": "grid",
-		"columns": [{
-				"md": 2,
-				"body": {
-					"type": "nav",
-					"stacked": true,
-					"source": "/pangu/menu_list_for_nav"
-				}
-			},
-			{
-				"md": 10,
-				"body": [{
-						"type": "button-toolbar",
-						"className": "m-b",
-						"buttons": [{
-								"type": "button",
-								"label": "新建页面",
-								"actionType": "dialog",
-								"dialog": {
-									"title": "页面设置",
-									"size": "lg",
-									"body": {
-										"type": "form",
-										"api": {
-											"method": "post",
-											"url": "/pangu/page_create",
-											"adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};"
-										},
-										"body": [{
-												"type": "switch",
-												"name": "is_visible",
-												"value": true,
-												"label": "是否导航中显示"
-											},
-											{
-												"type": "input-text",
-												"name": "label",
-												"required": true,
-												"placeholder": "请输入标题",
-												"label": "标题"
-											},
-											{
-												"type": "input-text",
-												"name": "url_key",
-												"required": true,
-												"label": "url 标识"
-											},
-											{
-												"type": "input-text",
-												"name": "page_describe",
-												"label": "描述",
-												"placeholder": "描述内容"
-											},
-											{
-												"type": "icon-picker",
-												"name": "icon",
-												"label": "图标",
-												"labelField": "text"
-											},
-											{
-												"type": "tree-select",
-												"name": "parent_id",
-												"label": "父级页面",
-												"source": "/pangu/menu_list_for_page_select"
-											},
-											{
-												"name": "page_content",
-												"type": "editor",
-												"language": "json",
-												"label": "page_content",
-												"value": "{\"type\":\"page\",\"title\":\"Dashboard\",\"initApi\":\"/demo_api/ping\",\"body\":\"ping is ${randstr}\"}"
-											}
-										]
-									}
-								}
-							},
-							{
-								"type": "button",
-								"label": "新建文件夹",
-								"actionType": "dialog",
-								"dialog": {
-									"title": "页面设置",
-									"size": "lg",
-									"body": {
-										"type": "form",
-										"api": {
-											"method": "post",
-											"url": "/pangu/menu_create",
-											"adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};"
-										},
-										"body": [{
-												"type": "switch",
-												"name": "is_visible",
-												"value": true,
-												"label": "是否导航中显示"
-											},
-											{
-												"type": "input-text",
-												"name": "label",
-												"required": true,
-												"placeholder": "请输入标题",
-												"label": "标题"
-											},
-											{
-												"type": "input-text",
-												"name": "url_key",
-												"required": true,
-												"label": "url 标识"
-											},
-											{
-												"type": "icon-picker",
-												"name": "icon",
-												"label": "图标",
-												"labelField": "text"
-											},
-											{
-												"type": "tree-select",
-												"name": "parent_id",
-												"label": "父级页面",
-												"source": "/pangu/menu_list_for_page_select"
-											}
-										]
-									}
-								}
-							}
-						]
-					},
-					{
-						"type": "crud",
-						"draggable": true,
-						"api": {
-							"method": "get",
-							"url": "/pangu/menu_list?parent_id=${parent_id}",
-							"   adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK', data:{items: payload.data.list,count: payload.data.total}};} else {return {status: 1, msg:payload.stat, data:{items: [],count: 0}};};"
-						},
-						"bulkActions": [],
-						"columns": [{
-								"name": "menu_id",
-								"label": "ID"
-							},
-							{
-								"label": "页面",
-								"type": "tpl",
-								"tpl": "${label}(${url})"
-							},
-							{
-								"name": "is_folder",
-								"label": "是否是文件夹"
-							},
-							{
-								"name": "create_time",
-								"label": "创建时间"
-							},
-							{
-								"type": "operation",
-								"label": "操作",
-								"width": 130,
-								"buttons": [{
-										"type": "button",
-										"icon": "fa fa-cog",
-										"actionType": "dialog",
-										"dialog": {
-											"title": "编辑",
-											"size": "lg",
-											"body": {
-												"type": "form",
-												"name": "sample-edit-form",
-												"api": {
-													"method": "post",
-													"url": "/pangu/menu_update",
-													"adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};",
-													"data": {
-														"menu_id": "${menu_id}",
-														"url_key": "${url_key}",
-														"label": "${label}",
-														"icon": "${icon}",
-														"is_visible": "${is_visible}",
-														"parent_id": "${parent_id}"
-													}
-												},
-												"body": [{
-														"type": "switch",
-														"name": "is_visible",
-														"value": true,
-														"label": "是否导航中显示"
-													},
-													{
-														"type": "input-text",
-														"name": "label",
-														"required": true,
-														"placeholder": "请输入标题",
-														"label": "标题"
-													},
-													{
-														"type": "input-text",
-														"name": "url_key",
-														"required": true,
-														"label": "url 标识"
-													},
-													{
-														"type": "icon-picker",
-														"name": "icon",
-														"label": "图标",
-														"labelField": "text"
-													},
-													{
-														"type": "tree-select",
-														"name": "parent_id",
-														"label": "父级页面",
-														"source": "/pangu/menu_list_for_page_select"
-													}
-												]
-											}
-										}
-									},
-									{
-										"type": "button",
-										"icon": "fa fa-pencil",
-										"actionType": "dialog",
-										"visibleOn": "is_folder == false",
-										"dialog": {
-											"title": "编辑",
-											"size": "lg",
-											"body": {
-												"type": "form",
-												"name": "sample-edit-form",
-												"initApi": "/pangu/page_get?page_id=${page_id}",
-												"api": {
-													"method": "post",
-													"url": "/pangu/page_update",
-													"adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};",
-													"data": {
-														"page_id": "${page_id}",
-														"page_content": "${page_content}",
-														"page_describe": "${page_describe}"
-													}
-												},
-												"body": [{
-														"type": "input-text",
-														"name": "page_describe",
-														"label": "描述"
-													},
-													{
-														"name": "page_content",
-														"type": "editor",
-														"language": "json",
-														"label": "page_content"
-													}
-												]
-											}
-										}
-									},
-									{
-										"type": "button",
-										"icon": "fa fa-times text-danger",
-										"actionType": "ajax",
-										"confirmText": "您确认要删除?",
-										"api": {
-											"method": "post",
-											"url": "/pangu/menu_delete",
-											"adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};",
-											"data": {
-												"menu_id": "${menu_id}"
-											}
-										}
-									}
-								],
-								"toggled": true
-							}
-						]
-					}
-				]
-			}
-		]
-	}]
+  "type": "page",
+  "body": [
+    {
+      "type": "grid",
+      "columns": [
+        {
+          "md": 2,
+          "body": {
+            "type": "nav",
+            "stacked": true,
+            "source": "/pangu/menu_list_for_nav"
+          }
+        },
+        {
+          "md": 10,
+          "body": [
+            {
+              "type": "button-toolbar",
+              "className": "m-b",
+              "buttons": [
+                {
+                  "type": "button",
+                  "label": "新建页面",
+                  "actionType": "dialog",
+                  "dialog": {
+                    "title": "页面设置",
+                    "size": "lg",
+                    "body": {
+                      "type": "form",
+                      "api": {
+                        "method": "post",
+                        "url": "/pangu/page_create",
+                        "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};"
+                      },
+                      "body": [
+                        {
+                          "type": "switch",
+                          "name": "is_visible",
+                          "value": true,
+                          "label": "是否导航中显示"
+                        },
+                        {
+                          "type": "input-text",
+                          "name": "label",
+                          "required": true,
+                          "placeholder": "请输入标题",
+                          "label": "标题"
+                        },
+                        {
+                          "type": "input-text",
+                          "name": "url_key",
+                          "required": true,
+                          "label": "url 标识"
+                        },
+                        {
+                          "type": "input-text",
+                          "name": "page_describe",
+                          "label": "描述",
+                          "placeholder": "描述内容"
+                        },
+                        {
+                          "type": "icon-picker",
+                          "name": "icon",
+                          "label": "图标",
+                          "labelField": "text"
+                        },
+                        {
+                          "type": "tree-select",
+                          "name": "parent_id",
+                          "label": "父级页面",
+                          "source": "/pangu/menu_list_for_page_select"
+                        },
+                        {
+                          "name": "page_content",
+                          "type": "editor",
+                          "language": "json",
+                          "label": "page_content",
+                          "value": "{\"type\":\"page\",\"title\":\"Dashboard\",\"initApi\":\"/demo_api/ping\",\"body\":\"ping is ${randstr}\"}"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "button",
+                  "label": "新建文件夹",
+                  "actionType": "dialog",
+                  "dialog": {
+                    "title": "页面设置",
+                    "size": "lg",
+                    "body": {
+                      "type": "form",
+                      "api": {
+                        "method": "post",
+                        "url": "/pangu/menu_create",
+                        "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};"
+                      },
+                      "body": [
+                        {
+                          "type": "switch",
+                          "name": "is_visible",
+                          "value": true,
+                          "label": "是否导航中显示"
+                        },
+                        {
+                          "type": "input-text",
+                          "name": "label",
+                          "required": true,
+                          "placeholder": "请输入标题",
+                          "label": "标题"
+                        },
+                        {
+                          "type": "input-text",
+                          "name": "url_key",
+                          "required": true,
+                          "label": "url 标识"
+                        },
+                        {
+                          "type": "icon-picker",
+                          "name": "icon",
+                          "label": "图标",
+                          "labelField": "text"
+                        },
+                        {
+                          "type": "tree-select",
+                          "name": "parent_id",
+                          "label": "父级页面",
+                          "source": "/pangu/menu_list_for_page_select"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "crud",
+              "draggable": true,
+              "api": {
+                "method": "get",
+                "url": "/pangu/menu_list?parent_id=${parent_id}",
+                "   adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK', data:{items: payload.data.list,count: payload.data.total}};} else {return {status: 1, msg:payload.stat, data:{items: [],count: 0}};};"
+              },
+              "bulkActions": [],
+              "columns": [
+                {
+                  "name": "menu_id",
+                  "label": "ID"
+                },
+                {
+                  "label": "页面",
+                  "type": "tpl",
+                  "tpl": "${label}(${url})"
+                },
+                {
+                  "name": "is_folder",
+                  "label": "是否是文件夹"
+                },
+                {
+                  "name": "create_time",
+                  "label": "创建时间"
+                },
+                {
+                  "type": "operation",
+                  "label": "操作",
+                  "width": 130,
+                  "buttons": [
+                    {
+                      "type": "button",
+                      "icon": "fa fa-cog",
+                      "actionType": "dialog",
+                      "dialog": {
+                        "title": "编辑",
+                        "size": "lg",
+                        "body": {
+                          "type": "form",
+                          "name": "sample-edit-form",
+                          "api": {
+                            "method": "post",
+                            "url": "/pangu/menu_update",
+                            "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};",
+                            "data": {
+                              "menu_id": "${menu_id}",
+                              "url_key": "${url_key}",
+                              "label": "${label}",
+                              "icon": "${icon}",
+                              "is_visible": "${is_visible}",
+                              "parent_id": "${parent_id}"
+                            }
+                          },
+                          "body": [
+                            {
+                              "type": "switch",
+                              "name": "is_visible",
+                              "value": true,
+                              "label": "是否导航中显示"
+                            },
+                            {
+                              "type": "input-text",
+                              "name": "label",
+                              "required": true,
+                              "placeholder": "请输入标题",
+                              "label": "标题"
+                            },
+                            {
+                              "type": "input-text",
+                              "name": "url_key",
+                              "required": true,
+                              "label": "url 标识"
+                            },
+                            {
+                              "type": "icon-picker",
+                              "name": "icon",
+                              "label": "图标",
+                              "labelField": "text"
+                            },
+                            {
+                              "type": "tree-select",
+                              "name": "parent_id",
+                              "label": "父级页面",
+                              "source": "/pangu/menu_list_for_page_select"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "button",
+                      "icon": "fa fa-pencil",
+                      "actionType": "dialog",
+                      "visibleOn": "is_folder == false",
+                      "dialog": {
+                        "title": "编辑",
+                        "size": "lg",
+                        "body": {
+                          "type": "form",
+                          "name": "sample-edit-form",
+                          "initApi": {
+                            "method": "get",
+                            "url": "/pangu/page_get?page_id=${page_id}",
+                            "adaptor": "if (payload.stat == 'OK') {payload.data.page_content_original = payload.data.page_content; return {status: 0, data: payload.data};} else {return {status: 1, msg:payload.stat};};"
+                          },
+                          "api": {
+                            "method": "post",
+                            "url": "/pangu/page_update",
+                            "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};",
+                            "data": {
+                              "page_id": "${page_id}",
+                              "page_content": "${page_content}",
+                              "page_describe": "${page_describe}"
+                            }
+                          },
+                          "data": {
+                            "page_content_original": "${page_content}"
+                          },
+                          "body": [
+                            {
+                              "type": "input-text",
+                              "name": "page_describe",
+                              "label": "描述"
+                            },
+                            {
+                              "name": "page_content",
+                              "type": "editor",
+                              "language": "json",
+                              "label": "page_content",
+                              "size": "xxl"
+                            },
+                            {
+                              "type": "button",
+                              "label": "对比JSON",
+                              "level": "info",
+                              "actionType": "dialog",
+                              "dialog": {
+                                "title": "JSON对比",
+                                "size": "full",
+                                "body": {
+                                  "type": "diff-editor",
+                                  "language": "json",
+                                  "name": "page_content",
+                                  "diffValue": "${page_content_original}"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "button",
+                      "icon": "fa fa-times text-danger",
+                      "actionType": "ajax",
+                      "confirmText": "您确认要删除?",
+                      "api": {
+                        "method": "post",
+                        "url": "/pangu/menu_delete",
+                        "adaptor": "if (payload.stat == 'OK') {return {status: 0, msg:'OK'};} else {return {status: 1, msg:payload.stat};};",
+                        "data": {
+                          "menu_id": "${menu_id}"
+                        }
+                      }
+                    }
+                  ],
+                  "toggled": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

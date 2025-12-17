@@ -1,0 +1,24 @@
+---
+alwaysApply: true
+description: butterfly-admin项目特定规则
+---
+
+# butterfly-admin项目规则
+
+## 项目结构
+- 必须自定义编译nginx并放置在`sbin/`目录
+- 静态资源应放在`static/`目录下
+- 模板文件应放在`templates/`目录下
+
+## 部署要求
+- 如需使用本地amis jssdk，需要：
+  1. 下载到`static/jssdk/`目录
+  2. 修改[templates/index.html](mdr:templates/index.html)中的资源引用路径
+
+## 进程管理
+- 必须使用[run.sh](mdr:run.sh)脚本管理nginx进程
+- 支持的命令包括：start/stop/restart/status
+
+## 文档参考
+- [AMIS示例](https://aisuda.bce.baidu.com/amis/examples/index)
+- [项目文档](https://meetbill.gitbook.io/butterfly-user-doc/fe/butterfly-admin)
